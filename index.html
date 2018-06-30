@@ -30,6 +30,8 @@
   <title>Memory Game</title>
   <!-- link to external style sheets -->
   <link rel="stylesheet" href="style/main.css">
+  <!-- link to external javascript -->
+  <script src="game.setup.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <script>
@@ -40,7 +42,7 @@
   </script>
   <script>
     //////////////////////////////////
-    // PRELOAD IMAGES
+    // PRELOAD FILES
     //////////////////////////////////
 
     window.onload = function () {
@@ -51,6 +53,9 @@
 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'js/jquery.fireworks.js');
+        xhr.send('');
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'game.setup.js');
         xhr.send('');
         xhr = new XMLHttpRequest();
         xhr.open('GET', 'style/main.css');
@@ -225,7 +230,7 @@
 
       document.body.style.backgroundImage = "url('img/disneyBG.jpg')";
 
-      // Change link font to default
+      // Change all link fonts to default
 
       document.getElementById('advanced').style.fontSize = '1.5em';
       document.getElementById('advanced').style.fontWeight = 'normal';
@@ -306,9 +311,6 @@
       for (var i = 0; i < memoryArray.length; i++) {
         output += '<div id="tile_' + i + '" onclick="memoryFlipTile(this,\'' + memoryArray[i] + '\')"></div>';
       }
-
-      var setMaxFlips = '100'; // Max card flips (flipCounter)
-      var setMaxTime = '100'; // Max time (myTimer)
 
       // Get the user's current level in the game
 
@@ -567,10 +569,10 @@
             //////////////////////////////////
 
             // Uncomment this line and comment the
-            // Line below it for developing
-            // So you don't have to complete each level
-            // if (tilesFlipped == 2) {
-            if (tilesFlipped == memoryArray.length) {
+            // Line below it for developing so that
+            // You don't have to complete the whole level
+            if (tilesFlipped == 2) {
+            // if (tilesFlipped == memoryArray.length) {
 
               // Stop the timer
 
@@ -586,15 +588,15 @@
               // Gather data for the winning message
               // and save in localStorage
 
-              if (flipCounter <= 45) {
+              if (flipCounter <= goldMax) {
                 rank = 'You got the gold!!!';
                 medalImg = '<img id="medal" src="img/medal_gold.png">';
                 medal = 'medal_gold';
-              } else if (flipCounter > 45 && flipCounter < 60) {
+              } else if (flipCounter > goldMax && flipCounter < silverMax) {
                 rank = 'You got the silver!';
                 medalImg = '<img id="medal" src="img/medal_silver.png">';
                 medal = 'medal_silver';
-              } else if (flipCounter > 60 && flipCounter < 75) {
+              } else if (flipCounter > silverMax && flipCounter < bronzeMax) {
                 rank = 'Eh... you got bronze';
                 medalImg = '<img id="medal" src="img/medal_bronze.png">';
                 medal = 'medal_bronze';
@@ -793,30 +795,8 @@
         <div class="medals" id="medal5"></div>
         <div class="medals" id="medal6"></div>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <div style="clear:both"></div>
+
     </div>
 
     <!-- Score board -->
@@ -990,7 +970,6 @@
     //////////////////////////////////
     function fireworks() {
       $('.fireworks').fireworks({
-        sound: false,
         opacity: 0.9,
         width: '100%',
         height: '100%'
