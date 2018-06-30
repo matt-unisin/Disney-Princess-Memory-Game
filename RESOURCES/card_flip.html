@@ -1,0 +1,47 @@
+<style>
+#card_container{ width:71px; height:85px; margin:10px; float:left; }
+#card_container > .back {
+	position:absolute;
+	-webkit-transform: perspective( 600px ) rotateY( 0deg );
+	transform: perspective( 600px ) rotateY( 0deg );
+	background:#FC0; width:71px; height:85px; border-radius: 7px;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	transition: -webkit-transform .3s linear 0s;
+	transition: transform .3s linear 0s;
+}
+#card_container > .front {
+	position:absolute;
+	-webkit-transform: perspective( 600px ) rotateY( 180deg );
+	transform: perspective( 600px ) rotateY( 180deg );
+	background: #80BFFF; width:71px; height:85px; border-radius: 7px;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	transition: -webkit-transform .3s linear 0s;
+	transition: transform .3s linear 0s;
+}
+#card {
+	width: 100%;
+	height: auto;
+}
+</style>
+<script>
+// flip tiles
+function card1Back() {
+	var t1b = document.getElementsByClassName("back");
+	var t1f = document.getElementsByClassName("front");
+	t1b[0].style.webkitTransform = "perspective( 600px ) rotateY( -180deg )";
+	t1f[0].style.webkitTransform = "perspective( 600px ) rotateY( 0deg )";
+}
+function card1Front(){
+	var t1f = document.getElementsByClassName("front");
+	var t1b = document.getElementsByClassName("back");
+	t1f[0].style.webkitTransform = "perspective( 600px ) rotateY( +180deg )";
+	t1b[0].style.webkitTransform = "perspective( 600px ) rotateY( 0deg )";
+}
+</script>
+<!-- cards -->
+<div id="card_container">
+	<div class="back" onclick="card1Back('back')"><img id="card"  src="games/img/memory_card_back.jpg"></div>
+	<div class="front" onclick="card1Front('front')"><img id="card"  src="games/img/belle.gif"></div>
+</div>
