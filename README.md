@@ -1,0 +1,1 @@
+Just a basic memory card game with Disney themed graphics. It has 3 skill levels (beginner, intermediate and advanced), with 6 levels per skill level. Each level has it's own easily adjusted parameters using a timer and card flip counter.
