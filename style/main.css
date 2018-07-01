@@ -30,6 +30,27 @@ body {
   overflow-x: hidden;
 }
 
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #282e34;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #999;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
 /* "You won!/You lost" */
 
 h1 {
