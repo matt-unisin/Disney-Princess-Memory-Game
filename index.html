@@ -250,23 +250,6 @@
       }
     }
   </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <script>
     //////////////////////////////////
     // GAME SETUP
@@ -589,8 +572,8 @@
             // Uncomment this line and comment the
             // Line below it for developing so that
             // You don't have to complete the whole level
-            if (tilesFlipped == 2) {
-              // if (tilesFlipped == memoryArray.length) {
+            // if (tilesFlipped == 2) {
+            if (tilesFlipped == memoryArray.length) {
 
               // Stop the timer
 
@@ -869,6 +852,7 @@
     var start = document.getElementById("start").addEventListener('click', startCount);
 
     function startCount() {
+      closeSlideMenu();
       document.getElementById('pause').style.display = 'block';
       document.getElementById('start').style.display = 'none';
       document.getElementById('memory_board').style.display = 'block';
