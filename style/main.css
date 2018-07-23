@@ -30,6 +30,26 @@ body {
   overflow-x: hidden;
 }
 
+/* Load screen */
+
+div#load_screen{
+	background: #f072a1;
+	opacity: 1;
+	position: fixed;
+  z-index: 10;
+  top: 0px;
+  left: 0px;
+	width: 100%;
+	height: 100vh;
+}
+div#load_screen > div#loading{
+	color:#FFF;
+	width: 225px;
+	height: 201px;
+  margin: 250px auto;
+  text-align: center;
+}
+
 /* SCROLLBAR */
 /* width */
 ::-webkit-scrollbar {
@@ -38,7 +58,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #282e34;
+  background: #f072a1;
 }
 
 /* Handle */

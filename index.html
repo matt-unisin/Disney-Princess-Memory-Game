@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <!-- Preload images (try 1) -->
+  <link rel="prefetch" href="img/Logo.png">
   <link rel="prefetch" href="img/disneyBG.jpg">
   <link rel="prefetch" href="img/ariel.gif">
   <link rel="prefetch" href="img/aurora.gif">
@@ -21,6 +21,7 @@
   <link rel="prefetch" href="img/medal_silver.png">
   <link rel="prefetch" href="img/medal_bronze.png">
   <link rel="prefetch" href="img/sadness.png">
+  <link rel="prefetch" href="img/ariel_and_eric.png">
   <!-- If IE use the latest rendering engine -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Set the page to roughly half the width of the device and set the zoom level -->
@@ -42,14 +43,26 @@
   </script>
   <script>
     //////////////////////////////////
-    // PRELOAD FILES
+    // PRELOAD ASSETS SCREEN (try 2)
+    //////////////////////////////////
+    window.addEventListener("load", function(){
+      setTimeout(function () {
+      var load_screen = document.getElementById("load_screen");
+      document.body.removeChild(load_screen);
+      newBoard();
+      }, 3000);
+    });
+  </script>
+  <script>
+    //////////////////////////////////
+    // PRELOAD FILES (try 3)
     //////////////////////////////////
 
     window.onload = function () {
 
       setTimeout(function () {
 
-        // XHR to request a JS and a CSS
+        // XHR to request JS and CSS
 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'js/jquery.fireworks.js');
@@ -61,7 +74,7 @@
         xhr.open('GET', 'style/main.css');
         xhr.send('');
 
-        // preload images (try 2)
+        // preload images
 
         var images = [];
 
@@ -75,6 +88,7 @@
         //-- IMAGES --//
 
         preload(
+          "img/Logo.png",
           "img/disneyBG.jpg",
           "img/ariel.gif",
           "img/aurora.gif",
@@ -91,7 +105,8 @@
           "img/medal_gold.png",
           "img/medal_silver.png",
           "img/medal_bronze.png",
-          "img/sadness.png"
+          "img/sadness.png",
+          "ariel_and_eric.png"
         )
       }, 1000);
     };
@@ -101,13 +116,13 @@
     // SIDE MENU
     //////////////////////////////////
 
-    function openSlideMenu() {
+    function openSideMenu() {
       document.getElementById('side-menu').style.width = '280px';
       document.getElementById('main').style.marginLeft = '280px';
       document.getElementById('nav').style.visibility = 'hidden';
     }
 
-    function closeSlideMenu() {
+    function closeSideMenu() {
       document.getElementById('side-menu').style.width = '0';
       document.getElementById('main').style.marginLeft = '0';
       document.getElementById('nav').style.visibility = 'visible';
@@ -191,6 +206,11 @@
     //////////////////////////////////
 
     function selectSkill(skill) {
+      
+      // First, remove the fireworks canvas element
+      // If the game has already been won
+
+      $("#fireworksField").remove();
 
       this.skill = skill;
       startCount();
@@ -224,9 +244,9 @@
       document.getElementById(skill).style.fontSize = '1.9em';
       document.getElementById(skill).style.fontWeight = 'bold';
 
-      closeSlideMenu();
+      closeSideMenu();
 
-      location.reload();
+      newBoard();
     }
   </script>
   <script>
@@ -647,7 +667,7 @@
                 // YOU WON!!!
                 ////////////////////////
 
-                closeSlideMenu();
+                closeSideMenu();
 
                 // Update the medal in the side menu
 
@@ -680,7 +700,9 @@
 
                 setTimeout(function () {
                   document.getElementById('messageBox').innerHTML =
-                    '<h1>Created by:</h1>I will stab you in the<br />fucking face games&trade;';
+                    `<h1>Created by:</h1>
+                    I will stab you in<br />
+                    the face games&trade;`;
                   slowBoxIn('messageBox');
                 }, 16000);
 
@@ -738,12 +760,16 @@
 </head>
 
 <body>
+
+  <!-- Preload assets screen -->
+  <div id="load_screen"><div id="loading"><img src="img/Logo.png" alt="loading..."><br /><br />Loading...</div></div>
+
   <div id="main" class="fireworks">
 
     <!-- Open side menu -->
     <nav class="navbar" id="nav">
       <span class="open-slide">
-        <a href="#" onclick="openSlideMenu()">
+        <a href="#" onclick="openSideMenu()">
           <svg width="30" height="30">
             <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
             <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
@@ -757,7 +783,7 @@
     <div id="side-menu" class="side-nav">
 
       <!-- Close button -->
-      <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+      <a href="#" class="btn-close" onclick="closeSideMenu()">&times;</a>
       <br />
       <br />
 
@@ -815,7 +841,7 @@
 
       <script>
         //////////////////////////////////
-        // DISPLAY THE MAX FLIPS FOR EACH MEDAL
+        // MEDAL RANGES
         //////////////////////////////////
         document.getElementById('madal-ranges').innerHTML = 'Gold = less than ' + goldMax + '<br />Silver = less than ' + silverMax +
           '<br />Bronze = less than ' + bronzeMax;
@@ -844,6 +870,7 @@
     //////////////////////////////////
 
     function timedCount() {
+      
       document.getElementById('timer').innerHTML = time;
       time = time + 1;
       myTimer = setTimeout(timedCount, 1000);
@@ -852,7 +879,7 @@
     var start = document.getElementById("start").addEventListener('click', startCount);
 
     function startCount() {
-      closeSlideMenu();
+      closeSideMenu();
       document.getElementById('pause').style.display = 'block';
       document.getElementById('start').style.display = 'none';
       document.getElementById('memory_board').style.display = 'block';
@@ -982,10 +1009,6 @@
         break;
     }
   </script>
-  <!-- Call to create new board -->
-  <script>
-    newBoard();
-  </script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="js/jquery.fireworks.js"></script>
   <script>
@@ -1003,5 +1026,4 @@
     console.timeEnd('Run time');
   </script>
 </body>
-
 </html>
